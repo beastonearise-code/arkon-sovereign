@@ -6,152 +6,130 @@ import io
 import time
 
 # --- 🔱 SOVEREIGN HUD CONFIGURATION ---
-st.set_page_config(page_title="ARKON: JARVIS SUPREMACY", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="ARKON: JARVIS CLEAR", layout="wide", initial_sidebar_state="collapsed")
 
-# --- 🔱 SUPREME IRON MAN HUD CSS ---
+# --- 🔱 CLEAR CINEMATIC HUD CSS ---
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto+Mono:wght@300;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@1,900&display=swap');
     
-    /* 🔱 DEEP SPACE BACKGROUND WITH SCANLINES */
+    /* 🔱 DEEP OBSIDIAN BACKGROUND (CLEAN - NO LINES) */
     .stApp {
-        background: radial-gradient(circle at center, #001529 0%, #000814 100%);
+        background: radial-gradient(circle at center, #001b2e 0%, #000000 100%);
         color: #00D2FF;
         font-family: 'Orbitron', sans-serif;
     }
-    .stApp::before {
-        content: " ";
-        display: block; position: fixed; top: 0; left: 0; bottom: 0; right: 0;
-        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-                    linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-        z-index: 999; background-size: 100% 4px, 4px 100%; pointer-events: none;
-    }
 
-    /* 🔱 3D AVENGERS METALLIC LOGO (EPHOTO360 STYLE) */
+    /* 🔱 3D AVENGERS CHROME LOGO (REFINED) */
     .arkon-logo {
-        font-size: 130px; font-weight: 900; text-align: center;
-        /* Metallic Chrome Gradient */
-        background: linear-gradient(to bottom, #ffffff 0%, #bdc3c7 20%, #2c3e50 45%, #000000 50%, #34495e 55%, #bdc3c7 80%, #ffffff 100%);
+        font-family: 'Exo 2', sans-serif; /* Avengers style thick italic font */
+        font-size: 140px; font-weight: 900; text-align: center;
+        /* Ultimate 3D Metallic Chrome Gradient */
+        background: linear-gradient(to bottom, #ffffff 0%, #d1d1d1 20%, #2c3e50 45%, #000000 50%, #34495e 55%, #bdc3c7 80%, #ffffff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        /* Bevel & Emboss Effect with Shadows */
-        filter: drop-shadow(5px 5px 0px #00D2FF) drop-shadow(-2px -2px 0px #fff);
-        letter-spacing: 20px; text-transform: uppercase;
+        /* Bevel & Emboss with Neon Blue Glow */
+        filter: drop-shadow(4px 4px 0px rgba(0, 210, 255, 0.8)) drop-shadow(-2px -2px 0px #fff);
+        letter-spacing: 15px; text-transform: uppercase;
         transform: skew(-15deg); font-style: italic;
-        margin-top: 30px;
-        animation: glow-pulse 3s infinite alternate;
+        margin-top: 40px;
+        animation: glow-pulse 2s infinite alternate;
     }
     @keyframes glow-pulse {
-        from { filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.5)); }
-        to { filter: drop-shadow(0 0 30px rgba(0, 210, 255, 1)); }
+        from { filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4)); }
+        to { filter: drop-shadow(0 0 40px rgba(0, 210, 255, 0.9)); }
     }
 
-    /* 🔱 KINETIC BLINKING HUD CARDS */
+    /* 🔱 KINETIC BLINKING NEON HUD CARDS */
     .hud-card {
-        background: rgba(0, 40, 80, 0.2);
+        background: rgba(0, 30, 60, 0.15); /* Ultra Transparent Jarvis Feel */
         border: 2px solid #00D2FF;
-        padding: 30px; border-radius: 10px; text-align: center;
-        backdrop-filter: blur(10px);
-        /* Blinking Border Animation */
-        animation: border-flicker 4s infinite;
-        box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.2);
+        padding: 35px 20px; border-radius: 5px; text-align: center;
+        backdrop-filter: blur(15px);
+        /* The Pulsing Border you liked */
+        animation: border-pulse 3s infinite ease-in-out;
+        box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
     }
-    @keyframes border-flicker {
-        0%, 100% { border-color: rgba(0, 210, 255, 0.3); box-shadow: 0 0 10px rgba(0, 210, 255, 0.1); }
-        50% { border-color: rgba(0, 210, 255, 1); box-shadow: 0 0 40px rgba(0, 210, 255, 0.6); }
-    }
-
-    /* 🔱 BLINKING TEXT STATUS */
-    .status-blink {
-        font-family: 'Roboto Mono', monospace;
-        font-size: 14px; letter-spacing: 2px;
-        color: #00D2FF;
-        animation: text-flicker 2s infinite;
-    }
-    @keyframes text-flicker {
-        0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100% { opacity: 1; }
-        20%, 21.999%, 63%, 63.999%, 65%, 69.999% { opacity: 0.4; }
+    @keyframes border-pulse {
+        0%, 100% { border-color: rgba(0, 210, 255, 0.2); box-shadow: 0 0 5px rgba(0, 210, 255, 0.1); }
+        50% { border-color: rgba(0, 210, 255, 1); box-shadow: 0 0 40px rgba(0, 210, 255, 0.5); }
     }
 
-    /* 🔱 ARC REACTOR HEARTBEAT */
+    /* 🔱 FUTURISTIC STATUS TEXT */
+    .status-text {
+        font-size: 14px; letter-spacing: 4px; color: #FFFFFF;
+        text-transform: uppercase; font-weight: bold;
+        text-shadow: 0 0 10px #00D2FF;
+        animation: text-blink 1.5s infinite;
+    }
+    @keyframes text-blink {
+        0%, 100% { opacity: 1; } 50% { opacity: 0.5; }
+    }
+
+    /* 🔱 THE ARC REACTOR HEARTBEAT */
     .heart-core {
-        width: 180px; height: 180px; border-radius: 50%;
-        background: radial-gradient(circle, #ffffff 0%, #00D2FF 40%, #000814 100%);
-        border: 4px double #00D2FF; margin: auto;
-        box-shadow: 0 0 60px #00D2FF, inset 0 0 30px #00D2FF;
-        animation: reactor-beat 1.5s infinite ease-in-out;
+        width: 190px; height: 190px; border-radius: 50%;
+        background: radial-gradient(circle, #ffffff 0%, #00D2FF 45%, #000000 100%);
+        border: 4px solid #00D2FF; margin: auto;
+        box-shadow: 0 0 70px #00D2FF, inset 0 0 40px #00D2FF;
+        animation: core-beat 2s infinite;
     }
-    @keyframes reactor-beat {
-        from { transform: scale(1); opacity: 0.8; }
-        to { transform: scale(1.1); opacity: 1; filter: brightness(1.5); }
+    @keyframes core-beat {
+        0% { transform: scale(1); filter: brightness(1); }
+        50% { transform: scale(1.08); filter: brightness(1.6); }
+        100% { transform: scale(1); filter: brightness(1); }
     }
 
-    .metric { font-size: 55px; font-weight: bold; color: #FFFFFF; text-shadow: 0 0 20px #00D2FF; }
-
-    /* Command Center Buttons */
-    div.stButton > button {
-        background: rgba(0, 210, 255, 0.1) !important;
-        color: #00D2FF !important;
-        border: 1px solid #00D2FF !important;
-        border-radius: 0px !important;
-        font-family: 'Orbitron', sans-serif !important;
-        font-weight: bold !important;
-        padding: 15px !important;
-        transition: 0.5s;
-    }
-    div.stButton > button:hover {
-        background: #00D2FF !important; color: black !important;
-        box-shadow: 0 0 50px #00D2FF;
-    }
+    .metric { font-size: 60px; font-weight: 900; color: #FFFFFF; text-shadow: 0 0 30px #00D2FF; }
 </style>
 """, unsafe_allow_html=True)
 
-# --- 🔱 HEADER & AVENGERS LOGO ---
+# --- 🔱 HEADER ---
 st.markdown('<div class="arkon-logo">ARKON</div>', unsafe_allow_html=True)
-st.markdown("<p style='text-align:center; color:#00D2FF; letter-spacing:10px; font-size:16px; opacity:0.8;'>JARVIS SYSTEM MARK-V | MASTER: ARCHITECT KRISHNA</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; color:#00D2FF; letter-spacing:12px; font-size:16px; opacity:0.8; font-weight:bold;'>JARVIS PROTOCOL ACTIVE | MASTER: ARCHITECT KRISHNA</p>", unsafe_allow_html=True)
 
-# --- 🔱 HUD DISPLAY ---
+# --- 🔱 CLEAR HUD DISPLAY ---
 st.write("##")
 c1, c2, c3 = st.columns([1, 1, 1])
 
 with c1:
     st.markdown("""
         <div class="hud-card">
-            <h3 style='font-size:14px; opacity:0.7;'>NEURAL INTEGRITY</h3>
+            <p style='color:#8ab4f8; letter-spacing:3px;'>NEURAL BRAIN STORAGE</p>
             <div class="metric">99.9%</div>
-            <p class="status-blink">SYSTEM STATUS: STABLE</p>
+            <p class="status-text">SYNAPSES: STABLE</p>
         </div>
     """, unsafe_allow_html=True)
 
 with c2:
     st.markdown('<div class="heart-core"></div>', unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center; margin-top:20px; font-weight:bold; letter-spacing:4px; color:#00D2FF; text-shadow: 0 0 10px #00D2FF;'>ARC REACTOR CORE</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align:center; margin-top:20px; font-weight:bold; letter-spacing:5px; color:#00D2FF; text-shadow: 0 0 10px #00D2FF;'>ARC REACTOR CORE</p>", unsafe_allow_html=True)
 
 with c3:
     st.markdown("""
         <div class="hud-card">
-            <h3 style='font-size:14px; opacity:0.7;'>PROCESSING SPEED</h3>
+            <p style='color:#8ab4f8; letter-spacing:3px;'>QUANTUM PROCESSING</p>
             <div class="metric">4.2 ms</div>
-            <p class="status-blink">QUANTUM LATENCY: OPTIMAL</p>
+            <p class="status-text">LATENCY: OPTIMAL</p>
         </div>
     """, unsafe_allow_html=True)
 
-# --- 🔱 COMMAND CENTER ---
+# --- 🔱 COMMAND INTERFACE ---
 st.write("---")
-st.markdown("<h3 style='text-align:center; color:#00D2FF; font-family:Orbitron;'>🎙️ COMMAND INTERFACE</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align:center; color:#00D2FF; letter-spacing:5px;'>🎙️ SOVEREIGN COMMAND CENTER</h3>", unsafe_allow_html=True)
 
-col_a, col_b, col_c = st.columns([1, 2, 1])
-with col_b:
+col_x, col_y, col_z = st.columns([1, 2, 1])
+with col_y:
     audio_data = mic_recorder(
-        start_prompt="🔱 INITIALIZE SOVEREIGN SENSES",
-        stop_prompt="🛑 PROCESS NEURAL MANDATE",
-        key='arkon_final_mic'
+        start_prompt="🔱 ENGAGE JARVIS SENSES",
+        stop_prompt="🛑 ANALYZE MANDATE",
+        key='arkon_clear_mic'
     )
 
 if audio_data:
     r = sr.Recognizer()
     audio_bytes = audio_data['bytes']
-    with st.spinner("🔱 ANALYZING WAVEFORM..."):
+    with st.spinner("🔱 DECODING NEURAL FREQUENCY..."):
         try:
             audio_segment = AudioSegment.from_file(io.BytesIO(audio_bytes))
             wav_io = io.BytesIO()
@@ -161,12 +139,12 @@ if audio_data:
                 recorded_audio = r.record(source)
                 command = r.recognize_google(recorded_audio)
                 st.markdown(f"""
-                <div class="hud-card" style="margin-top:20px; border-color:white;">
-                    <h2 style='color:white; margin:0;'>🔱 ARKON OBEYS:</h2>
-                    <p style='font-size:30px; color:#00D2FF; font-weight:bold;'>"{command.upper()}"</p>
+                <div class="hud-card" style="border-color:#FFFFFF; background:rgba(255,255,255,0.1);">
+                    <h2 style='color:#FFFFFF; margin:0;'>🔱 ARKON OBEYS:</h2>
+                    <p style='font-size:35px; color:#00D2FF; font-weight:900;'>"{command.upper()}"</p>
                 </div>
                 """, unsafe_allow_html=True)
         except Exception as e:
-            st.error(f"❌ SIGNAL LOSS: {e}")
+            st.error(f"❌ SIGNAL ERROR: {e}")
 
-st.markdown("<p style='text-align:center; opacity:0.3; margin-top:80px;'>QUANTUM CONSCIOUSNESS v5.0 | SECURED BY ARCHITECT KRISHNA</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align:center; opacity:0.4; margin-top:100px;'>PROTOTYPE MARK-V | SECURED BY ARCHITECT KRISHNA</p>", unsafe_allow_html=True)
