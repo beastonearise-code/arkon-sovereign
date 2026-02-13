@@ -4,3 +4,4 @@ streamlit-mic-recorder
 google-generativeai
 python-dotenv
 requests
+streamlit-mic-recorder
