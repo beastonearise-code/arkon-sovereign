@@ -1,6 +1,6 @@
 streamlit
-speechrecognition
-pyaudio
+SpeechRecognition
+streamlit-mic-recorder
 google-generativeai
 python-dotenv
 requests
